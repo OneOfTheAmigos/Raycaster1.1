@@ -3,6 +3,11 @@ Update notes:
 - Can now switch between colors using the number keys
 - Secret color schemes ;)
 
+Necessary Libraries:
+- pygame
+- math
+- numpy
+
 Start the program by running runme.py
 You will be asked if you want to customize the program
 Follow the directions, and respond using the options in the []
