@@ -57,6 +57,8 @@ mapArray = [[1, 1, 1, 1, 1, 1, 1, 1],
             [1, 0, 1, 1, 1, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 1]]
 
+additionalrects = [pygame.Rect(1200, 250, 200, 10)]
+
 #creates all of the rectangles
 activeRectangles = []
 def CreateRectangles():
@@ -65,6 +67,8 @@ def CreateRectangles():
             if mapArray[i][j] == 1:
                 thisrectangle = pygame.Rect(i * (WindowLength / len(mapArray)), j * (WindowHeight / len(mapArray[i])), WindowLength / len(mapArray), WindowHeight / len(mapArray[i]))
                 activeRectangles.append(thisrectangle)
+    for k in additionalrects:
+        activeRectangles.append(k)
 
 def DrawRectangles():
     for rectangles in activeRectangles:
@@ -282,6 +286,12 @@ def gameloop():
     MainPlayer = Player(200, 200)
     CreateRectangles()
     CreateBoundaries()
+    global IsFPDisplay
+    global SquareColor
+    global DarkSquareColor
+    global FloorColor
+    global SkyColor
+
     clock = pygame.time.Clock() 
     run = True
     while run == True:
@@ -291,18 +301,59 @@ def gameloop():
                 run = False
 
             #changes the perspective when you click the space key
-            global IsFPDisplay
+            #changes the color when you click the number keys
             if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         if IsFPDisplay == True:
                             IsFPDisplay = False
                         else:
                             IsFPDisplay = True
+                    elif event.key == pygame.K_1:
+                        SquareColor = (255, 0, 0) 
+                        DarkSquareColor = (150, 0, 0) 
+                        FloorColor = (238, 177, 224) 
+                        SkyColor = (47, 194, 225) 
+                    elif event.key == pygame.K_2:
+                        SquareColor = (255, 255, 255)
+                        DarkSquareColor = (200, 200, 200)
+                        FloorColor = (0, 0, 0)
+                        SkyColor = (0, 0, 0)
+                    elif event.key == pygame.K_3:
+                        SquareColor = (188, 90, 13)
+                        DarkSquareColor = (141, 50, 0)
+                        FloorColor = (210, 190, 0)
+                        SkyColor = (85, 109, 255)
+                    elif event.key == pygame.K_4:
+                        SquareColor = (0, 100, 0)
+                        DarkSquareColor = (0, 60, 0)
+                        FloorColor = (0, 0, 75)
+                        SkyColor = (0, 0, 150)
+                    elif event.key == pygame.K_5:
+                        SquareColor = (134, 182, 225)
+                        DarkSquareColor = (100, 139, 185)
+                        FloorColor = (180, 0, 169)
+                        SkyColor = (50, 0, 50)
+                    elif event.key == pygame.K_6:
+                        SquareColor = (171, 167, 102)
+                        DarkSquareColor = (102, 90, 23)
+                        FloorColor = (200, 198, 155)
+                        SkyColor = (172, 155, 100)
+                    elif event.key == pygame.K_x:
+                        SquareColor = (0, 0, 60)
+                        DarkSquareColor = (0, 0, 30)
+                        FloorColor = (0, 30, 0)
+                        SkyColor = (0, 0, 0)
                     
 
         #happens every loop
         keys_pressed = pygame.key.get_pressed()
         MainPlayer.Move(keys_pressed)
+
+        if MainPlayer.x > 1000:
+            SquareColor = (71, 71, 71)
+            DarkSquareColor = (71, 71, 71)
+            FloorColor = (230, 230, 230)
+            SkyColor = (255, 255, 255)
         
         Window.fill(SkyColor)
         if IsFPDisplay == True:
@@ -344,7 +395,7 @@ def Customizer():
     global FloorColor
     global SkyColor
 
-    print("Set a number for field of view:   [Reccomended: 100]")
+    print("Set a number for field of view:   ")
     bbcheck = False 
     while bbcheck == False:
         try:
