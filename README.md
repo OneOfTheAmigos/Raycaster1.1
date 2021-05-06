@@ -10,6 +10,7 @@ Follow the directions, and respond using the options in the []
 Move forward and backward with the UP and DOWN arrow keys
 Look with the LEFT or RIGHT arrow keys
 Use the SPACEBAR to switch views
+Use the number (1-6) keys to switch color schemes
 
 There is no hit detection. 
 Clip through the walls without a care
